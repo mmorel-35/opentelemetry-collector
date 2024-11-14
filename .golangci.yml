@@ -141,6 +141,7 @@ linters:
     - copyloopvar
     - depguard
     - errcheck
+    - errname
     - errorlint
     - gocritic
     - gofmt
