@@ -7,6 +7,7 @@ toolchain go1.23.2
 require (
 	github.com/a8m/envsubst v1.4.2
 	github.com/client9/misspell v0.3.4
+	github.com/daixiang0/gci v0.13.5
 	github.com/golangci/golangci-lint v1.63.4
 	github.com/google/addlicense v1.1.1
 	github.com/jcchavezs/porto v0.7.0
@@ -17,7 +18,6 @@ require (
 	go.opentelemetry.io/build-tools/multimod v0.16.0
 	go.opentelemetry.io/build-tools/semconvgen v0.16.0
 	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0
-	golang.org/x/tools v0.29.0
 	golang.org/x/vuln v1.1.4
 	gotest.tools/gotestsum v1.12.0
 	mvdan.cc/gofumpt v0.7.0
@@ -66,7 +66,6 @@ require (
 	github.com/cloudflare/circl v1.3.7 // indirect
 	github.com/curioswitch/go-reassign v0.3.0 // indirect
 	github.com/cyphar/filepath-securejoin v0.3.6 // indirect
-	github.com/daixiang0/gci v0.13.5 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/denis-tingaikin/go-header v0.5.0 // indirect
 	github.com/dnephin/pflag v1.0.7 // indirect
@@ -226,6 +225,7 @@ require (
 	golang.org/x/telemetry v0.0.0-20240522233618-39ace7a40ae7 // indirect
 	golang.org/x/term v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/tools v0.29.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect

@@ -56,6 +56,11 @@ output:
 
 # all available settings of specific linters
 linters-settings:
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(go.opentelemetry.io/collector)
   govet:
     # settings per analyzer
     settings:
@@ -73,15 +78,6 @@ linters-settings:
       # defined in this repository are not in the execution hot path.
       # See https://github.com/open-telemetry/opentelemetry-collector/issues/2789
       - fieldalignment
-
-  gofmt:
-    # simplify code: gofmt with `-s` option, true by default
-    simplify: true
-
-  goimports:
-    # put imports beginning with prefix after 3rd-party packages;
-    # it's a comma-separated list of prefixes
-    local-prefixes: go.opentelemetry.io/collector
 
   misspell:
     # Correct spellings using locale preferences for US or UK.
@@ -198,9 +194,9 @@ linters:
     - depguard
     - errcheck
     - errorlint
+    - gci
     - gocritic
     - gofumpt
-    - goimports
     - gosec
     - govet
     - misspell
