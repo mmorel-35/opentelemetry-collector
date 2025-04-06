@@ -13,6 +13,7 @@ package tools // import "go.opentelemetry.io/collector/internal/tools"
 import (
 	_ "github.com/a8m/envsubst/cmd/envsubst"
 	_ "github.com/client9/misspell/cmd/misspell"
+	_ "github.com/daixiang0/gci"
 	_ "github.com/golangci/golangci-lint/v2/cmd/golangci-lint"
 	_ "github.com/google/addlicense"
 	_ "github.com/jcchavezs/porto/cmd/porto"

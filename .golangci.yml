@@ -1,9 +1,15 @@
 formatters:
   enable:
+    - gci
     - gofumpt
     - goimports
 
   settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - prefix(go.opentelemetry.io/collector)
     gofmt:
       # simplify code: gofmt with `-s` option, true by default
       simplify: true

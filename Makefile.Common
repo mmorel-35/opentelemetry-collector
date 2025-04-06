@@ -30,7 +30,8 @@ CHECKFILE    := $(TOOLS_BIN_DIR)/checkfile
 CHLOGGEN     := $(TOOLS_BIN_DIR)/chloggen
 CROSSLINK    := $(TOOLS_BIN_DIR)/crosslink
 ENVSUBST     := $(TOOLS_BIN_DIR)/envsubst
-GITHUBGEN     := $(TOOLS_BIN_DIR)/githubgen
+GCI          := $(TOOLS_BIN_DIR)/gci
+GITHUBGEN    := $(TOOLS_BIN_DIR)/githubgen
 GOFUMPT      := $(TOOLS_BIN_DIR)/gofumpt
 GOIMPORTS    := $(TOOLS_BIN_DIR)/goimports
 GOVULNCHECK  := $(TOOLS_BIN_DIR)/govulncheck
@@ -71,7 +72,7 @@ benchmark: $(GOTESTSUM)
 	$(GOTESTSUM) --packages="$(ALL_PKGS)" -- -bench=. -run=notests ./... | tee benchmark.txt
 
 .PHONY: fmt
-fmt: common/gofmt common/goimports common/gofumpt
+fmt: common/gofmt common/goimports common/gci common/gofumpt
 
 .PHONY: tidy
 tidy:
@@ -85,6 +86,10 @@ lint: $(LINT)
 .PHONY: common/gofmt
 common/gofmt:
 	gofmt -w -s ./
+
+.PHONY: common/gci
+common/gci: $(GCI)
+	$(GCI) write -s standard -s default -s "prefix(go.opentelemetry.io/collector)" .
 
 .PHONY: common/goimports
 common/goimports: $(GOIMPORTS)
