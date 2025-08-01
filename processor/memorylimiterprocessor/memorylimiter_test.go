@@ -515,7 +515,7 @@ type host struct {
 	component.Host
 }
 
-func (h *host) GetExtensions() map[component.ID]component.Component {
+func (*host) GetExtensions() map[component.ID]component.Component {
 	ret := make(map[component.ID]component.Component)
 	return ret
 }

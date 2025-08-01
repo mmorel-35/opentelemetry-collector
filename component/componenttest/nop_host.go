@@ -15,10 +15,10 @@ func NewNopHost() component.Host {
 	return &nopHost{}
 }
 
-func (nh *nopHost) GetFactory(component.Kind, component.Type) component.Factory {
+func (*nopHost) GetFactory(component.Kind, component.Type) component.Factory {
 	return nil
 }
 
-func (nh *nopHost) GetExtensions() map[component.ID]component.Component {
+func (*nopHost) GetExtensions() map[component.ID]component.Component {
 	return nil
 }

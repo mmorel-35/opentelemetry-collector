@@ -1171,6 +1171,6 @@ func createBackend(endpoint string, handler func(writer http.ResponseWriter, req
 
 type badReader struct{}
 
-func (b badReader) Read([]byte) (int, error) {
+func (badReader) Read([]byte) (int, error) {
 	return 0, errors.New("Bad read")
 }

@@ -17,7 +17,7 @@ func newDisabledCounter(embedded metric.Int64Counter) *disabledCounter {
 	return &disabledCounter{Int64Counter: embedded}
 }
 
-func (m *disabledCounter) Enabled(context.Context) bool {
+func (*disabledCounter) Enabled(context.Context) bool {
 	return false
 }
 

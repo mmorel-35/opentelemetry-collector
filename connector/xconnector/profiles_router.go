@@ -33,4 +33,4 @@ func NewProfilesRouter(cm map[pipeline.ID]xconsumer.Profiles) ProfilesRouterAndC
 	}
 }
 
-func (r *profilesRouter) privateFunc() {}
+func (*profilesRouter) privateFunc() {}

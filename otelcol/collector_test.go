@@ -519,7 +519,7 @@ func newFailureProvider(_ confmap.ProviderSettings) confmap.Provider {
 	return &failureProvider{}
 }
 
-func (fmp *failureProvider) Retrieve(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
+func (*failureProvider) Retrieve(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
 	return nil, errors.New("a failure occurred during configuration retrieval")
 }
 
@@ -545,7 +545,7 @@ func (f *fakeProvider) Scheme() string {
 	return f.scheme
 }
 
-func (f *fakeProvider) Shutdown(context.Context) error {
+func (*fakeProvider) Shutdown(context.Context) error {
 	return nil
 }
 

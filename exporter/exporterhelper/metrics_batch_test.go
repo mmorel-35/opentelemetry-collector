@@ -729,11 +729,11 @@ type mockMetricsSizer struct {
 	dpSize int
 }
 
-func (m *mockMetricsSizer) MetricsSize(_ pmetric.Metrics) int {
+func (*mockMetricsSizer) MetricsSize(_ pmetric.Metrics) int {
 	return 0
 }
 
-func (m *mockMetricsSizer) MetricSize(_ pmetric.Metric) int {
+func (*mockMetricsSizer) MetricSize(_ pmetric.Metric) int {
 	return 0
 }
 
@@ -753,14 +753,14 @@ func (m *mockMetricsSizer) SummaryDataPointSize(_ pmetric.SummaryDataPoint) int 
 	return m.dpSize
 }
 
-func (m *mockMetricsSizer) ResourceMetricsSize(_ pmetric.ResourceMetrics) int {
+func (*mockMetricsSizer) ResourceMetricsSize(_ pmetric.ResourceMetrics) int {
 	return 0
 }
 
-func (m *mockMetricsSizer) ScopeMetricsSize(_ pmetric.ScopeMetrics) int {
+func (*mockMetricsSizer) ScopeMetricsSize(_ pmetric.ScopeMetrics) int {
 	return 0
 }
 
-func (m *mockMetricsSizer) DeltaSize(size int) int {
+func (*mockMetricsSizer) DeltaSize(size int) int {
 	return size
 }

@@ -54,7 +54,7 @@ type unhealthy struct {
 	telemetry component.TelemetrySettings
 }
 
-func (p unhealthy) Start(_ context.Context, host component.Host) error {
+func (unhealthy) Start(_ context.Context, host component.Host) error {
 	go func() {
 		componentstatus.ReportStatus(host, componentstatus.NewEvent(componentstatus.StatusRecoverableError))
 	}()

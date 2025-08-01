@@ -14,8 +14,8 @@ func NewNopStatusReporter() status.Reporter {
 
 type nopStatusReporter struct{}
 
-func (r *nopStatusReporter) Ready() {}
+func (*nopStatusReporter) Ready() {}
 
-func (r *nopStatusReporter) ReportStatus(*componentstatus.InstanceID, *componentstatus.Event) {}
+func (*nopStatusReporter) ReportStatus(*componentstatus.InstanceID, *componentstatus.Event) {}
 
-func (r *nopStatusReporter) ReportOKIfStarting(*componentstatus.InstanceID) {}
+func (*nopStatusReporter) ReportOKIfStarting(*componentstatus.InstanceID) {}

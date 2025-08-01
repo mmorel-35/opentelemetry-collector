@@ -235,7 +235,7 @@ type mutatingLogsSink struct {
 	*consumertest.LogsSink
 }
 
-func (mts *mutatingLogsSink) Capabilities() consumer.Capabilities {
+func (*mutatingLogsSink) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: true}
 }
 
@@ -243,6 +243,6 @@ type mutatingErr struct {
 	consumertest.Consumer
 }
 
-func (mts mutatingErr) Capabilities() consumer.Capabilities {
+func (mutatingErr) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: true}
 }

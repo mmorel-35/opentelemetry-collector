@@ -462,17 +462,17 @@ func (ec *EmbeddedConfig2) Unmarshal(component *Conf) error {
 
 type EmbeddedConfigWithError struct{}
 
-func (ecwe *EmbeddedConfigWithError) Unmarshal(_ *Conf) error {
+func (*EmbeddedConfigWithError) Unmarshal(_ *Conf) error {
 	return errors.New("embedded error")
 }
 
 type EmbeddedConfigWithMarshalError struct{}
 
-func (ecwe EmbeddedConfigWithMarshalError) Marshal(_ *Conf) error {
+func (EmbeddedConfigWithMarshalError) Marshal(_ *Conf) error {
 	return errors.New("marshaling error")
 }
 
-func (ecwe EmbeddedConfigWithMarshalError) Unmarshal(_ *Conf) error {
+func (EmbeddedConfigWithMarshalError) Unmarshal(_ *Conf) error {
 	return nil
 }
 
@@ -623,7 +623,7 @@ type errConfig struct {
 	Foo string `mapstructure:"foo"`
 }
 
-func (tc *errConfig) Unmarshal(*Conf) error {
+func (*errConfig) Unmarshal(*Conf) error {
 	return errors.New("never works")
 }
 

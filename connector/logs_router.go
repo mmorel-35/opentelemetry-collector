@@ -68,4 +68,4 @@ func (r *logsRouter) Consumer(pipelineIDs ...pipeline.ID) (consumer.Logs, error)
 	return fanoutconsumer.NewLogs(consumers), nil
 }
 
-func (r *logsRouter) privateFunc() {}
+func (*logsRouter) privateFunc() {}

@@ -97,7 +97,7 @@ func (f *factory) CreateMeterProvider(ctx context.Context, set Settings, cfg com
 	return f.createMeterProviderFunc(ctx, set, cfg)
 }
 
-func (f *factory) unexportedFactoryFunc() {}
+func (*factory) unexportedFactoryFunc() {}
 
 // newFactory returns a new Factory.
 func newFactory(createDefaultConfig component.CreateDefaultConfigFunc, options ...factoryOption) Factory {

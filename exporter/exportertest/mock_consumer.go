@@ -122,7 +122,7 @@ func (r *mockConsumer) ConsumeMetrics(_ context.Context, md pmetric.Metrics) err
 	return nil
 }
 
-func (r *mockConsumer) Capabilities() consumer.Capabilities {
+func (*mockConsumer) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{}
 }
 

@@ -64,7 +64,7 @@ func (bc *bufferedCore) Write(ent zapcore.Entry, fields []zapcore.Field) error {
 	return nil
 }
 
-func (bc *bufferedCore) Sync() error {
+func (*bufferedCore) Sync() error {
 	return nil
 }
 

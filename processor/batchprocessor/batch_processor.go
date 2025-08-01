@@ -162,7 +162,7 @@ func (bp *batchProcessor[T]) newShard(md map[string][]string) *shard[T] {
 	return b
 }
 
-func (bp *batchProcessor[T]) Capabilities() consumer.Capabilities {
+func (*batchProcessor[T]) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: true}
 }
 
@@ -295,7 +295,7 @@ func (sb *singleShardBatcher[T]) consume(_ context.Context, data T) error {
 	return nil
 }
 
-func (sb *singleShardBatcher[T]) currentMetadataCardinality() int {
+func (*singleShardBatcher[T]) currentMetadataCardinality() int {
 	return 1
 }
 
@@ -319,7 +319,7 @@ type multiShardBatcher[T any] struct {
 	size int
 }
 
-func (mb *multiShardBatcher[T]) start(context.Context) error {
+func (*multiShardBatcher[T]) start(context.Context) error {
 	return nil
 }
 

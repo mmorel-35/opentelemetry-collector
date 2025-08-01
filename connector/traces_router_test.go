@@ -23,7 +23,7 @@ type mutatingTracesSink struct {
 	*consumertest.TracesSink
 }
 
-func (mts *mutatingTracesSink) Capabilities() consumer.Capabilities {
+func (*mutatingTracesSink) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: true}
 }
 

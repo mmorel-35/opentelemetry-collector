@@ -835,15 +835,15 @@ func newNopConfigPipelineConfigs(pipelineCfgs pipelines.Config) Config {
 
 type configWatcherExtension struct{}
 
-func (comp *configWatcherExtension) Start(context.Context, component.Host) error {
+func (*configWatcherExtension) Start(context.Context, component.Host) error {
 	return nil
 }
 
-func (comp *configWatcherExtension) Shutdown(context.Context) error {
+func (*configWatcherExtension) Shutdown(context.Context) error {
 	return nil
 }
 
-func (comp *configWatcherExtension) NotifyConfig(context.Context, *confmap.Conf) error {
+func (*configWatcherExtension) NotifyConfig(context.Context, *confmap.Conf) error {
 	return errors.New("Failed to resolve config")
 }
 

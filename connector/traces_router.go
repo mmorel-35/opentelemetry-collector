@@ -34,4 +34,4 @@ func NewTracesRouter(cm map[pipeline.ID]consumer.Traces) TracesRouterAndConsumer
 	}
 }
 
-func (r *tracesRouter) privateFunc() {}
+func (*tracesRouter) privateFunc() {}

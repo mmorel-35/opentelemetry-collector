@@ -17,7 +17,7 @@ import (
 // { "my-config": "${expand:to-expand}" }
 type mockFileProvider struct{}
 
-func (d mockFileProvider) Retrieve(_ context.Context, uri string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
+func (mockFileProvider) Retrieve(_ context.Context, uri string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
 	expectedURI := "file:mock-file"
 	if uri != expectedURI {
 		panic("should not happen, the uri is expected to be " + expectedURI + " for mockFileProvider")
@@ -27,11 +27,11 @@ func (d mockFileProvider) Retrieve(_ context.Context, uri string, _ confmap.Watc
 	})
 }
 
-func (d mockFileProvider) Scheme() string {
+func (mockFileProvider) Scheme() string {
 	return "file"
 }
 
-func (d mockFileProvider) Shutdown(_ context.Context) error {
+func (mockFileProvider) Shutdown(_ context.Context) error {
 	return nil
 }
 
@@ -40,7 +40,7 @@ func (d mockFileProvider) Shutdown(_ context.Context) error {
 // where the provider associated with SCHEMA is responsible for resolving the value.
 type mockExpandProvider struct{}
 
-func (m mockExpandProvider) Retrieve(_ context.Context, uri string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
+func (mockExpandProvider) Retrieve(_ context.Context, uri string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
 	expectedURI := "expand:to-expand"
 	if uri != expectedURI {
 		panic("should not happen, the uri is expected to be " + expectedURI + " for mockExpandProvider")
@@ -48,18 +48,18 @@ func (m mockExpandProvider) Retrieve(_ context.Context, uri string, _ confmap.Wa
 	return confmap.NewRetrieved("expanded")
 }
 
-func (m mockExpandProvider) Scheme() string {
+func (mockExpandProvider) Scheme() string {
 	return "expand"
 }
 
-func (m mockExpandProvider) Shutdown(_ context.Context) error {
+func (mockExpandProvider) Shutdown(_ context.Context) error {
 	return nil
 }
 
 // mockUpperCaseConverter transforms the value of the `my-config` field in the configuration to uppercase.
 type mockUpperCaseConverter struct{}
 
-func (m mockUpperCaseConverter) Convert(_ context.Context, conf *confmap.Conf) error {
+func (mockUpperCaseConverter) Convert(_ context.Context, conf *confmap.Conf) error {
 	currentValue := conf.Get("my-config")
 	expectedValue := "expanded"
 	if currentValue != expectedValue {

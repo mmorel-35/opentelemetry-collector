@@ -34,4 +34,4 @@ func NewMetricsRouter(cm map[pipeline.ID]consumer.Metrics) MetricsRouterAndConsu
 	}
 }
 
-func (r *metricsRouter) privateFunc() {}
+func (*metricsRouter) privateFunc() {}

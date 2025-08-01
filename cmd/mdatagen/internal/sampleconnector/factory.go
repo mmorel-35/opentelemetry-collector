@@ -32,10 +32,10 @@ type nopConnector struct {
 	component.ShutdownFunc
 }
 
-func (n nopConnector) Capabilities() consumer.Capabilities {
+func (nopConnector) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: false}
 }
 
-func (n nopConnector) ConsumeMetrics(context.Context, pmetric.Metrics) error {
+func (nopConnector) ConsumeMetrics(context.Context, pmetric.Metrics) error {
 	return nil
 }

@@ -114,7 +114,7 @@ type reporter struct {
 	reportStatusCalled bool
 }
 
-func (r *reporter) GetExtensions() map[component.ID]component.Component {
+func (*reporter) GetExtensions() map[component.ID]component.Component {
 	return nil
 }
 
@@ -128,6 +128,6 @@ type host struct {
 	reportStatusCalled bool
 }
 
-func (h *host) GetExtensions() map[component.ID]component.Component {
+func (*host) GetExtensions() map[component.ID]component.Component {
 	return nil
 }

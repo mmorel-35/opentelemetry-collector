@@ -61,7 +61,7 @@ func (mb *multiBatcher) getPartition(ctx context.Context, req request.Request) *
 	return s.(*partitionBatcher)
 }
 
-func (mb *multiBatcher) Start(context.Context, component.Host) error {
+func (*multiBatcher) Start(context.Context, component.Host) error {
 	return nil
 }
 

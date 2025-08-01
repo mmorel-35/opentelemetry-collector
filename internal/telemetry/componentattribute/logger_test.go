@@ -223,5 +223,5 @@ func TestNewOTelTeeCoreWithAttributes(t *testing.T) {
 
 type constantClock time.Time
 
-func (c constantClock) Now() time.Time                       { return time.Time(c) }
-func (c constantClock) NewTicker(time.Duration) *time.Ticker { return &time.Ticker{} }
+func (c constantClock) Now() time.Time                     { return time.Time(c) }
+func (constantClock) NewTicker(time.Duration) *time.Ticker { return &time.Ticker{} }

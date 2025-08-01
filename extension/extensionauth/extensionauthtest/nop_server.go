@@ -22,7 +22,7 @@ type nopServer struct {
 }
 
 // Authenticate implements extensionauth.Server.
-func (n *nopServer) Authenticate(ctx context.Context, _ map[string][]string) (context.Context, error) {
+func (*nopServer) Authenticate(ctx context.Context, _ map[string][]string) (context.Context, error) {
 	return ctx, nil
 }
 

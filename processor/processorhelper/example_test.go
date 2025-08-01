@@ -83,7 +83,7 @@ func newExampleProcessor(ctx context.Context, cfg *exampleConfig) *exampleProces
 }
 
 // ConsumeMetrics modify metrics adding one attribute to resource.
-func (pcsr *exampleProcessor) consumeMetrics(_ context.Context, md pmetric.Metrics) (pmetric.Metrics, error) {
+func (*exampleProcessor) consumeMetrics(_ context.Context, md pmetric.Metrics) (pmetric.Metrics, error) {
 	rm := md.ResourceMetrics()
 	for i := 0; i < rm.Len(); i++ {
 		rm.At(i).Resource().Attributes().PutStr("processed_by", "exampleProcessor")

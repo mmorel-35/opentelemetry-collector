@@ -25,11 +25,11 @@ type TracesBytesSizer struct {
 // TracesCountSizer returns the number of spans in the traces.
 type TracesCountSizer struct{}
 
-func (s *TracesCountSizer) TracesSize(td ptrace.Traces) int {
+func (*TracesCountSizer) TracesSize(td ptrace.Traces) int {
 	return td.SpanCount()
 }
 
-func (s *TracesCountSizer) ResourceSpansSize(rs ptrace.ResourceSpans) int {
+func (*TracesCountSizer) ResourceSpansSize(rs ptrace.ResourceSpans) int {
 	count := 0
 	for k := 0; k < rs.ScopeSpans().Len(); k++ {
 		count += rs.ScopeSpans().At(k).Spans().Len()
@@ -37,14 +37,14 @@ func (s *TracesCountSizer) ResourceSpansSize(rs ptrace.ResourceSpans) int {
 	return count
 }
 
-func (s *TracesCountSizer) ScopeSpansSize(ss ptrace.ScopeSpans) int {
+func (*TracesCountSizer) ScopeSpansSize(ss ptrace.ScopeSpans) int {
 	return ss.Spans().Len()
 }
 
-func (s *TracesCountSizer) SpanSize(_ ptrace.Span) int {
+func (*TracesCountSizer) SpanSize(_ ptrace.Span) int {
 	return 1
 }
 
-func (s *TracesCountSizer) DeltaSize(newItemSize int) int {
+func (*TracesCountSizer) DeltaSize(newItemSize int) int {
 	return newItemSize
 }

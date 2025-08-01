@@ -173,7 +173,7 @@ func newReceiverFactory() receiver.Factory {
 
 type testReceiver struct{}
 
-func (t *testReceiver) Start(_ context.Context, host component.Host) error {
+func (*testReceiver) Start(_ context.Context, host component.Host) error {
 	componentstatus.ReportStatus(host, componentstatus.NewRecoverableErrorEvent(errors.New("test recoverable error")))
 	go func() {
 		componentstatus.ReportStatus(host, componentstatus.NewEvent(componentstatus.StatusOK))
@@ -182,7 +182,7 @@ func (t *testReceiver) Start(_ context.Context, host component.Host) error {
 	return nil
 }
 
-func (t *testReceiver) Shutdown(_ context.Context) error {
+func (*testReceiver) Shutdown(_ context.Context) error {
 	return nil
 }
 
@@ -263,12 +263,12 @@ func createDefaultExtensionConfig() component.Config {
 }
 
 // Start implements the component.Component interface.
-func (t *testExtension) Start(_ context.Context, _ component.Host) error {
+func (*testExtension) Start(_ context.Context, _ component.Host) error {
 	return nil
 }
 
 // Shutdown implements the component.Component interface.
-func (t *testExtension) Shutdown(_ context.Context) error {
+func (*testExtension) Shutdown(_ context.Context) error {
 	return nil
 }
 
@@ -283,16 +283,16 @@ func (t *testExtension) ComponentStatusChanged(
 }
 
 // NotifyConfig implements the extensioncapabilities.ConfigWatcher interface.
-func (t *testExtension) NotifyConfig(_ context.Context, _ *confmap.Conf) error {
+func (*testExtension) NotifyConfig(_ context.Context, _ *confmap.Conf) error {
 	return nil
 }
 
 // Ready implements the extensioncapabilities.PipelineWatcher interface.
-func (t *testExtension) Ready() error {
+func (*testExtension) Ready() error {
 	return nil
 }
 
 // NotReady implements the extensioncapabilities.PipelineWatcher interface.
-func (t *testExtension) NotReady() error {
+func (*testExtension) NotReady() error {
 	return nil
 }

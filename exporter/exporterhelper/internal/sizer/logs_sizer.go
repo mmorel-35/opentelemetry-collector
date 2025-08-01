@@ -26,11 +26,11 @@ type LogsBytesSizer struct {
 // LogsCountSizer returns the nunmber of logs entries.
 type LogsCountSizer struct{}
 
-func (s *LogsCountSizer) LogsSize(ld plog.Logs) int {
+func (*LogsCountSizer) LogsSize(ld plog.Logs) int {
 	return ld.LogRecordCount()
 }
 
-func (s *LogsCountSizer) ResourceLogsSize(rl plog.ResourceLogs) int {
+func (*LogsCountSizer) ResourceLogsSize(rl plog.ResourceLogs) int {
 	count := 0
 	for k := 0; k < rl.ScopeLogs().Len(); k++ {
 		count += rl.ScopeLogs().At(k).LogRecords().Len()
@@ -38,14 +38,14 @@ func (s *LogsCountSizer) ResourceLogsSize(rl plog.ResourceLogs) int {
 	return count
 }
 
-func (s *LogsCountSizer) ScopeLogsSize(sl plog.ScopeLogs) int {
+func (*LogsCountSizer) ScopeLogsSize(sl plog.ScopeLogs) int {
 	return sl.LogRecords().Len()
 }
 
-func (s *LogsCountSizer) LogRecordSize(_ plog.LogRecord) int {
+func (*LogsCountSizer) LogRecordSize(_ plog.LogRecord) int {
 	return 1
 }
 
-func (s *LogsCountSizer) DeltaSize(newItemSize int) int {
+func (*LogsCountSizer) DeltaSize(newItemSize int) int {
 	return newItemSize
 }

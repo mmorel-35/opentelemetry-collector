@@ -78,7 +78,7 @@ func (f *factory) Type() component.Type {
 	return f.cfgType
 }
 
-func (f *factory) unexportedFactoryFunc() {}
+func (*factory) unexportedFactoryFunc() {}
 
 func (f *factory) LogsStability() component.StabilityLevel {
 	return f.logsStabilityLevel

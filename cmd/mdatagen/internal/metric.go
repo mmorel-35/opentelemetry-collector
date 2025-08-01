@@ -176,7 +176,7 @@ type MetricValueType struct {
 	ValueType pmetric.NumberDataPointValueType
 }
 
-func (mvt *MetricValueType) Unmarshal(parser *confmap.Conf) error {
+func (*MetricValueType) Unmarshal(parser *confmap.Conf) error {
 	if !parser.IsSet("value_type") {
 		return errors.New("missing required field: `value_type`")
 	}
@@ -231,15 +231,15 @@ func (d *Gauge) Unmarshal(parser *confmap.Conf) error {
 	return parser.Unmarshal(d, confmap.WithIgnoreUnused())
 }
 
-func (d *Gauge) Type() string {
+func (*Gauge) Type() string {
 	return "Gauge"
 }
 
-func (d *Gauge) HasMonotonic() bool {
+func (*Gauge) HasMonotonic() bool {
 	return false
 }
 
-func (d *Gauge) HasAggregated() bool {
+func (*Gauge) HasAggregated() bool {
 	return false
 }
 
@@ -287,15 +287,15 @@ func (d *Sum) Unmarshal(parser *confmap.Conf) error {
 // 	return parser.Unmarshal(m)
 // }
 
-func (d *Sum) Type() string {
+func (*Sum) Type() string {
 	return "Sum"
 }
 
-func (d *Sum) HasMonotonic() bool {
+func (*Sum) HasMonotonic() bool {
 	return true
 }
 
-func (d *Sum) HasAggregated() bool {
+func (*Sum) HasAggregated() bool {
 	return true
 }
 
@@ -327,15 +327,15 @@ type Histogram struct {
 	Boundaries             []float64 `mapstructure:"bucket_boundaries"`
 }
 
-func (d *Histogram) Type() string {
+func (*Histogram) Type() string {
 	return "Histogram"
 }
 
-func (d *Histogram) HasMonotonic() bool {
+func (*Histogram) HasMonotonic() bool {
 	return false
 }
 
-func (d *Histogram) HasAggregated() bool {
+func (*Histogram) HasAggregated() bool {
 	return true
 }
 

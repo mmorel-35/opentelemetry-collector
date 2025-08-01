@@ -28,11 +28,11 @@ type ProfilesCountSizer struct{}
 
 var _ ProfilesSizer = (*ProfilesCountSizer)(nil)
 
-func (s *ProfilesCountSizer) ProfilesSize(pd pprofile.Profiles) int {
+func (*ProfilesCountSizer) ProfilesSize(pd pprofile.Profiles) int {
 	return pd.SampleCount()
 }
 
-func (s *ProfilesCountSizer) ResourceProfilesSize(rp pprofile.ResourceProfiles) int {
+func (*ProfilesCountSizer) ResourceProfilesSize(rp pprofile.ResourceProfiles) int {
 	count := 0
 	for k := 0; k < rp.ScopeProfiles().Len(); k++ {
 		count += rp.ScopeProfiles().At(k).Profiles().Len()
@@ -40,14 +40,14 @@ func (s *ProfilesCountSizer) ResourceProfilesSize(rp pprofile.ResourceProfiles) 
 	return count
 }
 
-func (s *ProfilesCountSizer) ScopeProfilesSize(sp pprofile.ScopeProfiles) int {
+func (*ProfilesCountSizer) ScopeProfilesSize(sp pprofile.ScopeProfiles) int {
 	return sp.Profiles().Len()
 }
 
-func (s *ProfilesCountSizer) ProfileSize(_ pprofile.Profile) int {
+func (*ProfilesCountSizer) ProfileSize(_ pprofile.Profile) int {
 	return 1
 }
 
-func (s *ProfilesCountSizer) DeltaSize(newItemSize int) int {
+func (*ProfilesCountSizer) DeltaSize(newItemSize int) int {
 	return newItemSize
 }

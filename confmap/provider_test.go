@@ -18,7 +18,7 @@ import (
 // The example is useful for implementing Providers of configuration that changes over time.
 type UpdatingProvider struct{}
 
-func (p UpdatingProvider) getCurrentConfig(_ string) any {
+func (UpdatingProvider) getCurrentConfig(_ string) any {
 	return "hello"
 }
 

@@ -14,23 +14,23 @@ type String string
 const maskedString = "[REDACTED]"
 
 // MarshalText marshals the string as `[REDACTED]`.
-func (s String) MarshalText() ([]byte, error) {
+func (String) MarshalText() ([]byte, error) {
 	return []byte(maskedString), nil
 }
 
 // String formats the string as `[REDACTED]`.
 // This is used for the %s and %q verbs.
-func (s String) String() string {
+func (String) String() string {
 	return maskedString
 }
 
 // GoString formats the string as `[REDACTED]`.
 // This is used for the %#v verb.
-func (s String) GoString() string {
+func (String) GoString() string {
 	return fmt.Sprintf("%#v", maskedString)
 }
 
 // MarshalBinary marshals the string `[REDACTED]` as []byte.
-func (s String) MarshalBinary() (text []byte, err error) {
+func (String) MarshalBinary() (text []byte, err error) {
 	return []byte(maskedString), nil
 }

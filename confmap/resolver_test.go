@@ -107,7 +107,7 @@ func (f *fakeProvider) Scheme() string {
 	return f.scheme
 }
 
-func (f *fakeProvider) Shutdown(context.Context) error {
+func (*fakeProvider) Shutdown(context.Context) error {
 	return nil
 }
 
@@ -115,7 +115,7 @@ type mockConverter struct {
 	err error
 }
 
-func (m *mockConverter) Convert(context.Context, *Conf) error {
+func (*mockConverter) Convert(context.Context, *Conf) error {
 	return errors.New("converter_err")
 }
 

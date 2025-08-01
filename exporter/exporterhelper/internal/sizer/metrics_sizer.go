@@ -30,7 +30,7 @@ type MetricsCountSizer struct{}
 
 var _ MetricsSizer = &MetricsCountSizer{}
 
-func (s *MetricsCountSizer) MetricsSize(md pmetric.Metrics) int {
+func (*MetricsCountSizer) MetricsSize(md pmetric.Metrics) int {
 	return md.DataPointCount()
 }
 
@@ -48,7 +48,7 @@ func (s *MetricsCountSizer) ScopeMetricsSize(sm pmetric.ScopeMetrics) (count int
 	return count
 }
 
-func (s *MetricsCountSizer) MetricSize(m pmetric.Metric) int {
+func (*MetricsCountSizer) MetricSize(m pmetric.Metric) int {
 	switch m.Type() {
 	case pmetric.MetricTypeGauge:
 		return m.Gauge().DataPoints().Len()
@@ -64,22 +64,22 @@ func (s *MetricsCountSizer) MetricSize(m pmetric.Metric) int {
 	return 0
 }
 
-func (s *MetricsCountSizer) DeltaSize(newItemSize int) int {
+func (*MetricsCountSizer) DeltaSize(newItemSize int) int {
 	return newItemSize
 }
 
-func (s *MetricsCountSizer) NumberDataPointSize(_ pmetric.NumberDataPoint) int {
+func (*MetricsCountSizer) NumberDataPointSize(_ pmetric.NumberDataPoint) int {
 	return 1
 }
 
-func (s *MetricsCountSizer) HistogramDataPointSize(_ pmetric.HistogramDataPoint) int {
+func (*MetricsCountSizer) HistogramDataPointSize(_ pmetric.HistogramDataPoint) int {
 	return 1
 }
 
-func (s *MetricsCountSizer) ExponentialHistogramDataPointSize(_ pmetric.ExponentialHistogramDataPoint) int {
+func (*MetricsCountSizer) ExponentialHistogramDataPointSize(_ pmetric.ExponentialHistogramDataPoint) int {
 	return 1
 }
 
-func (s *MetricsCountSizer) SummaryDataPointSize(_ pmetric.SummaryDataPoint) int {
+func (*MetricsCountSizer) SummaryDataPointSize(_ pmetric.SummaryDataPoint) int {
 	return 1
 }

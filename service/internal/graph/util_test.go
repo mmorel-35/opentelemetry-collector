@@ -298,15 +298,15 @@ type errComponent struct {
 	consumertest.Consumer
 }
 
-func (e errComponent) Capabilities() consumer.Capabilities {
+func (errComponent) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: false}
 }
 
-func (e errComponent) Start(context.Context, component.Host) error {
+func (errComponent) Start(context.Context, component.Host) error {
 	return errors.New("my error")
 }
 
-func (e errComponent) Shutdown(context.Context) error {
+func (errComponent) Shutdown(context.Context) error {
 	return errors.New("my error")
 }
 

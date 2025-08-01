@@ -68,7 +68,7 @@ func (f SizeofFunc[T]) Sizeof(t T) int64 {
 // RequestsSizer is a Sizer implementation that returns the size of a queue element as one request.
 type RequestsSizer[T any] struct{}
 
-func (rs RequestsSizer[T]) Sizeof(T) int64 {
+func (RequestsSizer[T]) Sizeof(T) int64 {
 	return 1
 }
 

@@ -759,7 +759,7 @@ type metricsSink struct {
 	metricsCount int
 }
 
-func (sme *metricsSink) Capabilities() consumer.Capabilities {
+func (*metricsSink) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{
 		MutatesData: false,
 	}

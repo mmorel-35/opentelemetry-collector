@@ -30,11 +30,11 @@ type customPerRPCCredentials struct{}
 
 var _ credentials.PerRPCCredentials = (*customPerRPCCredentials)(nil)
 
-func (c *customPerRPCCredentials) GetRequestMetadata(context.Context, ...string) (map[string]string, error) {
+func (*customPerRPCCredentials) GetRequestMetadata(context.Context, ...string) (map[string]string, error) {
 	return nil, nil
 }
 
-func (c *customPerRPCCredentials) RequireTransportSecurity() bool {
+func (*customPerRPCCredentials) RequireTransportSecurity() bool {
 	return true
 }
 

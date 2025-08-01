@@ -33,13 +33,13 @@ import (
 // itemsSizer is a sizer implementation that returns the size of a queue element as the number of items it contains.
 type itemsSizer struct{}
 
-func (is *itemsSizer) Sizeof(val int64) int64 {
+func (*itemsSizer) Sizeof(val int64) int64 {
 	return val
 }
 
 type bytesSizer struct{}
 
-func (is *bytesSizer) Sizeof(val int64) int64 {
+func (*bytesSizer) Sizeof(val int64) int64 {
 	return val * 10
 }
 
@@ -93,7 +93,7 @@ func (m *fakeBoundedStorageClient) Delete(ctx context.Context, key string) error
 	return m.Batch(ctx, storage.DeleteOperation(key))
 }
 
-func (m *fakeBoundedStorageClient) Close(context.Context) error {
+func (*fakeBoundedStorageClient) Close(context.Context) error {
 	return nil
 }
 
@@ -194,7 +194,7 @@ func (m *fakeStorageClientWithErrors) Delete(ctx context.Context, key string) er
 	return m.Batch(ctx, storage.DeleteOperation(key))
 }
 
-func (m *fakeStorageClientWithErrors) Close(context.Context) error {
+func (*fakeStorageClientWithErrors) Close(context.Context) error {
 	return nil
 }
 

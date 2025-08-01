@@ -370,7 +370,7 @@ var _ http.RoundTripper = &customRoundTripper{}
 
 type customRoundTripper struct{}
 
-func (c *customRoundTripper) RoundTrip(*http.Request) (*http.Response, error) {
+func (*customRoundTripper) RoundTrip(*http.Request) (*http.Response, error) {
 	return nil, nil
 }
 
@@ -385,7 +385,7 @@ type mockClient struct {
 }
 
 // RoundTripper implements extensionauth.HTTPClient.
-func (m *mockClient) RoundTripper(http.RoundTripper) (http.RoundTripper, error) {
+func (*mockClient) RoundTripper(http.RoundTripper) (http.RoundTripper, error) {
 	return &customRoundTripper{}, nil
 }
 

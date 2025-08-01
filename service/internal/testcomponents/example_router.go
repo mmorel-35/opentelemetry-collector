@@ -142,6 +142,6 @@ func (r *ExampleRouter) ConsumeProfiles(ctx context.Context, td pprofile.Profile
 	return r.profilesRight.ConsumeProfiles(ctx, td)
 }
 
-func (r *ExampleRouter) Capabilities() consumer.Capabilities {
+func (*ExampleRouter) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: false}
 }

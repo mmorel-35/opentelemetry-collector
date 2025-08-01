@@ -21,7 +21,7 @@ type MockExporter struct {
 
 var _ consumer.Logs = (*MockExporter)(nil)
 
-func (e *MockExporter) Capabilities() consumer.Capabilities {
+func (*MockExporter) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{}
 }
 

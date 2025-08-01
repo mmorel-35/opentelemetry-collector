@@ -38,7 +38,7 @@ type noopNoContextTracer struct {
 
 var noopSpan = noop.Span{}
 
-func (n *noopNoContextTracer) Start(ctx context.Context, _ string, _ ...trace.SpanStartOption) (context.Context, trace.Span) {
+func (*noopNoContextTracer) Start(ctx context.Context, _ string, _ ...trace.SpanStartOption) (context.Context, trace.Span) {
 	return ctx, noopSpan
 }
 
@@ -46,7 +46,7 @@ type noopNoContextTracerProvider struct {
 	embedded.TracerProvider
 }
 
-func (n *noopNoContextTracerProvider) Tracer(_ string, _ ...trace.TracerOption) trace.Tracer {
+func (*noopNoContextTracerProvider) Tracer(_ string, _ ...trace.TracerOption) trace.Tracer {
 	return &noopNoContextTracer{}
 }
 

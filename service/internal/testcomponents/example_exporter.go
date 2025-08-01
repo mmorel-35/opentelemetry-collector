@@ -81,6 +81,6 @@ func (exp *ExampleExporter) ConsumeProfiles(_ context.Context, td pprofile.Profi
 	return nil
 }
 
-func (exp *ExampleExporter) Capabilities() consumer.Capabilities {
+func (*ExampleExporter) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: false}
 }

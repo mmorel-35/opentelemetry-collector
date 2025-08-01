@@ -150,10 +150,10 @@ func newFakeQueueBatch() QueueBatchSettings[request.Request] {
 
 type fakeEncoding struct{}
 
-func (f fakeEncoding) Marshal(context.Context, request.Request) ([]byte, error) {
+func (fakeEncoding) Marshal(context.Context, request.Request) ([]byte, error) {
 	return []byte("mockRequest"), nil
 }
 
-func (f fakeEncoding) Unmarshal([]byte) (context.Context, request.Request, error) {
+func (fakeEncoding) Unmarshal([]byte) (context.Context, request.Request, error) {
 	return context.Background(), &requesttest.FakeRequest{}, nil
 }

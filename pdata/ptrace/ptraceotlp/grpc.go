@@ -48,7 +48,7 @@ func (c *grpcClient) Export(ctx context.Context, request ExportRequest, opts ...
 	return ExportResponse{orig: rsp, state: &state}, err
 }
 
-func (c *grpcClient) unexported() {}
+func (*grpcClient) unexported() {}
 
 // GRPCServer is the server API for OTLP gRPC TracesService service.
 // Implementations MUST embed UnimplementedGRPCServer.

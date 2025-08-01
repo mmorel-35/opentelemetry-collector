@@ -12,31 +12,31 @@ var _ MarshalSizer = (*ProtoMarshaler)(nil)
 
 type ProtoMarshaler struct{}
 
-func (e *ProtoMarshaler) MarshalProfiles(pd Profiles) ([]byte, error) {
+func (*ProtoMarshaler) MarshalProfiles(pd Profiles) ([]byte, error) {
 	pb := internal.ProfilesToProto(internal.Profiles(pd))
 	return pb.Marshal()
 }
 
-func (e *ProtoMarshaler) ProfilesSize(pd Profiles) int {
+func (*ProtoMarshaler) ProfilesSize(pd Profiles) int {
 	pb := internal.ProfilesToProto(internal.Profiles(pd))
 	return pb.Size()
 }
 
-func (e *ProtoMarshaler) ResourceProfilesSize(pd ResourceProfiles) int {
+func (*ProtoMarshaler) ResourceProfilesSize(pd ResourceProfiles) int {
 	return pd.orig.Size()
 }
 
-func (e *ProtoMarshaler) ScopeProfilesSize(pd ScopeProfiles) int {
+func (*ProtoMarshaler) ScopeProfilesSize(pd ScopeProfiles) int {
 	return pd.orig.Size()
 }
 
-func (e *ProtoMarshaler) ProfileSize(pd Profile) int {
+func (*ProtoMarshaler) ProfileSize(pd Profile) int {
 	return pd.orig.Size()
 }
 
 type ProtoUnmarshaler struct{}
 
-func (d *ProtoUnmarshaler) UnmarshalProfiles(buf []byte) (Profiles, error) {
+func (*ProtoUnmarshaler) UnmarshalProfiles(buf []byte) (Profiles, error) {
 	pb := otlpprofile.ProfilesData{}
 	err := pb.Unmarshal(buf)
 	return Profiles(internal.ProfilesFromProto(pb)), err

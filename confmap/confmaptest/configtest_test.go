@@ -52,7 +52,7 @@ type schemeProvider struct {
 	scheme string
 }
 
-func (s schemeProvider) Retrieve(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
+func (schemeProvider) Retrieve(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
 	return nil, nil
 }
 
@@ -60,6 +60,6 @@ func (s schemeProvider) Scheme() string {
 	return s.scheme
 }
 
-func (s schemeProvider) Shutdown(context.Context) error {
+func (schemeProvider) Shutdown(context.Context) error {
 	return nil
 }

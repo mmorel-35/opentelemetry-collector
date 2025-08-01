@@ -25,7 +25,7 @@ type mutatingProfilesSink struct {
 	*consumertest.ProfilesSink
 }
 
-func (mts *mutatingProfilesSink) Capabilities() consumer.Capabilities {
+func (*mutatingProfilesSink) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: true}
 }
 

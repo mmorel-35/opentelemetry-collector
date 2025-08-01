@@ -44,18 +44,18 @@ type nopProcessor struct {
 	component.ShutdownFunc
 }
 
-func (n nopProcessor) ConsumeTraces(context.Context, ptrace.Traces) error {
+func (nopProcessor) ConsumeTraces(context.Context, ptrace.Traces) error {
 	return nil
 }
 
-func (n nopProcessor) ConsumeLogs(context.Context, plog.Logs) error {
+func (nopProcessor) ConsumeLogs(context.Context, plog.Logs) error {
 	return nil
 }
 
-func (n nopProcessor) Capabilities() consumer.Capabilities {
+func (nopProcessor) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: true}
 }
 
-func (n nopProcessor) ConsumeMetrics(context.Context, pmetric.Metrics) error {
+func (nopProcessor) ConsumeMetrics(context.Context, pmetric.Metrics) error {
 	return nil
 }

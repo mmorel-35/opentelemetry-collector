@@ -324,7 +324,7 @@ type mockConsumer struct {
 	nonPermanentFailures int
 }
 
-func (m *mockConsumer) Capabilities() consumer.Capabilities {
+func (*mockConsumer) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{}
 }
 

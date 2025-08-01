@@ -44,7 +44,7 @@ type fakeEncoding struct {
 	mr request.Request
 }
 
-func (f fakeEncoding) Marshal(context.Context, request.Request) ([]byte, error) {
+func (fakeEncoding) Marshal(context.Context, request.Request) ([]byte, error) {
 	return []byte("mockRequest"), nil
 }
 

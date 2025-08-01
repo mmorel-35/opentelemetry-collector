@@ -31,11 +31,11 @@ type exampleReceiver struct {
 	nextMetricsConsumer consumer.Metrics
 }
 
-func (s *exampleReceiver) Start(context.Context, component.Host) error {
+func (*exampleReceiver) Start(context.Context, component.Host) error {
 	return nil
 }
 
-func (s *exampleReceiver) Shutdown(context.Context) error {
+func (*exampleReceiver) Shutdown(context.Context) error {
 	return nil
 }
 
@@ -112,7 +112,7 @@ func (g *exampleLogGenerator) Start() {
 	g.sequenceNum = 0
 }
 
-func (g *exampleLogGenerator) Stop() {}
+func (*exampleLogGenerator) Stop() {}
 
 func (g *exampleLogGenerator) Generate() []UniqueIDAttrVal {
 	// Make sure the id is atomically incremented. Generate() may be called concurrently.
@@ -138,7 +138,7 @@ func (g *exampleTraceGenerator) Start() {
 	g.sequenceNum = 0
 }
 
-func (g *exampleTraceGenerator) Stop() {}
+func (*exampleTraceGenerator) Stop() {}
 
 func (g *exampleTraceGenerator) Generate() []UniqueIDAttrVal {
 	// Make sure the id is atomically incremented. Generate() may be called concurrently.
@@ -164,7 +164,7 @@ func (g *exampleMetricGenerator) Start() {
 	g.sequenceNum = 0
 }
 
-func (g *exampleMetricGenerator) Stop() {}
+func (*exampleMetricGenerator) Stop() {}
 
 func (g *exampleMetricGenerator) Generate() []UniqueIDAttrVal {
 	// Make sure the id is atomically incremented. Generate() may be called concurrently.

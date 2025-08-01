@@ -241,8 +241,8 @@ func New(ctx context.Context, set Settings, cfg Config, options ...Option) (*Ext
 
 type nopReporter struct{}
 
-func (r *nopReporter) Ready() {}
+func (*nopReporter) Ready() {}
 
-func (r *nopReporter) ReportStatus(*componentstatus.InstanceID, *componentstatus.Event) {}
+func (*nopReporter) ReportStatus(*componentstatus.InstanceID, *componentstatus.Event) {}
 
-func (r *nopReporter) ReportOKIfStarting(*componentstatus.InstanceID) {}
+func (*nopReporter) ReportOKIfStarting(*componentstatus.InstanceID) {}

@@ -12,47 +12,47 @@ var _ MarshalSizer = (*ProtoMarshaler)(nil)
 
 type ProtoMarshaler struct{}
 
-func (e *ProtoMarshaler) MarshalMetrics(md Metrics) ([]byte, error) {
+func (*ProtoMarshaler) MarshalMetrics(md Metrics) ([]byte, error) {
 	pb := internal.MetricsToProto(internal.Metrics(md))
 	return pb.Marshal()
 }
 
-func (e *ProtoMarshaler) MetricsSize(md Metrics) int {
+func (*ProtoMarshaler) MetricsSize(md Metrics) int {
 	pb := internal.MetricsToProto(internal.Metrics(md))
 	return pb.Size()
 }
 
-func (e *ProtoMarshaler) ResourceMetricsSize(rm ResourceMetrics) int {
+func (*ProtoMarshaler) ResourceMetricsSize(rm ResourceMetrics) int {
 	return rm.orig.Size()
 }
 
-func (e *ProtoMarshaler) ScopeMetricsSize(sm ScopeMetrics) int {
+func (*ProtoMarshaler) ScopeMetricsSize(sm ScopeMetrics) int {
 	return sm.orig.Size()
 }
 
-func (e *ProtoMarshaler) MetricSize(m Metric) int {
+func (*ProtoMarshaler) MetricSize(m Metric) int {
 	return m.orig.Size()
 }
 
-func (e *ProtoMarshaler) NumberDataPointSize(ndp NumberDataPoint) int {
+func (*ProtoMarshaler) NumberDataPointSize(ndp NumberDataPoint) int {
 	return ndp.orig.Size()
 }
 
-func (e *ProtoMarshaler) SummaryDataPointSize(sdps SummaryDataPoint) int {
+func (*ProtoMarshaler) SummaryDataPointSize(sdps SummaryDataPoint) int {
 	return sdps.orig.Size()
 }
 
-func (e *ProtoMarshaler) HistogramDataPointSize(hdp HistogramDataPoint) int {
+func (*ProtoMarshaler) HistogramDataPointSize(hdp HistogramDataPoint) int {
 	return hdp.orig.Size()
 }
 
-func (e *ProtoMarshaler) ExponentialHistogramDataPointSize(ehdp ExponentialHistogramDataPoint) int {
+func (*ProtoMarshaler) ExponentialHistogramDataPointSize(ehdp ExponentialHistogramDataPoint) int {
 	return ehdp.orig.Size()
 }
 
 type ProtoUnmarshaler struct{}
 
-func (d *ProtoUnmarshaler) UnmarshalMetrics(buf []byte) (Metrics, error) {
+func (*ProtoUnmarshaler) UnmarshalMetrics(buf []byte) (Metrics, error) {
 	pb := otlpmetrics.MetricsData{}
 	err := pb.Unmarshal(buf)
 	return Metrics(internal.MetricsFromProto(pb)), err

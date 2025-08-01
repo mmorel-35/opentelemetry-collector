@@ -41,6 +41,6 @@ type testErrorType struct {
 	s string
 }
 
-func (t testErrorType) Error() string {
+func (testErrorType) Error() string {
 	return ""
 }

@@ -191,6 +191,8 @@ linters:
         - name: unreachable-code
         # Functions or methods with unused parameters can be a symptom of an unfinished refactoring or a bug.
         - name: unused-parameter
+        # Methods with unused receivers can be a symptom of an unfinished refactoring or a bug.
+        - name: unused-receiver
         # Since Go 1.18, interface{} has an alias: any. This rule proposes to replace instances of interface{} with any.
         - name: use-any
         # report when a variable declaration can be simplified
