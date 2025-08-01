@@ -343,7 +343,7 @@ func TestProfilesRequestExporter_WithShutdown_ReturnError(t *testing.T) {
 }
 
 func newPushProfilesData(retError error) xconsumer.ConsumeProfilesFunc {
-	return func(_ context.Context, _ pprofile.Profiles) error {
+	return func(context.Context, pprofile.Profiles) error {
 		return retError
 	}
 }

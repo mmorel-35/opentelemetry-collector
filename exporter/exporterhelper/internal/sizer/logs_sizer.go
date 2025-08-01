@@ -42,7 +42,7 @@ func (*LogsCountSizer) ScopeLogsSize(sl plog.ScopeLogs) int {
 	return sl.LogRecords().Len()
 }
 
-func (*LogsCountSizer) LogRecordSize(_ plog.LogRecord) int {
+func (*LogsCountSizer) LogRecordSize(plog.LogRecord) int {
 	return 1
 }
 

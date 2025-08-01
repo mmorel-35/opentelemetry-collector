@@ -47,7 +47,7 @@ type logsServer struct {
 	exportError error
 }
 
-func (r *logsServer) Export(_ context.Context, _ plogotlp.ExportRequest) (plogotlp.ExportResponse, error) {
+func (r *logsServer) Export(context.Context, plogotlp.ExportRequest) (plogotlp.ExportResponse, error) {
 	return plogotlp.NewExportResponse(), r.exportError
 }
 

@@ -729,35 +729,35 @@ type mockMetricsSizer struct {
 	dpSize int
 }
 
-func (*mockMetricsSizer) MetricsSize(_ pmetric.Metrics) int {
+func (*mockMetricsSizer) MetricsSize(pmetric.Metrics) int {
 	return 0
 }
 
-func (*mockMetricsSizer) MetricSize(_ pmetric.Metric) int {
+func (*mockMetricsSizer) MetricSize(pmetric.Metric) int {
 	return 0
 }
 
-func (m *mockMetricsSizer) NumberDataPointSize(_ pmetric.NumberDataPoint) int {
+func (m *mockMetricsSizer) NumberDataPointSize(pmetric.NumberDataPoint) int {
 	return m.dpSize
 }
 
-func (m *mockMetricsSizer) HistogramDataPointSize(_ pmetric.HistogramDataPoint) int {
+func (m *mockMetricsSizer) HistogramDataPointSize(pmetric.HistogramDataPoint) int {
 	return m.dpSize
 }
 
-func (m *mockMetricsSizer) ExponentialHistogramDataPointSize(_ pmetric.ExponentialHistogramDataPoint) int {
+func (m *mockMetricsSizer) ExponentialHistogramDataPointSize(pmetric.ExponentialHistogramDataPoint) int {
 	return m.dpSize
 }
 
-func (m *mockMetricsSizer) SummaryDataPointSize(_ pmetric.SummaryDataPoint) int {
+func (m *mockMetricsSizer) SummaryDataPointSize(pmetric.SummaryDataPoint) int {
 	return m.dpSize
 }
 
-func (*mockMetricsSizer) ResourceMetricsSize(_ pmetric.ResourceMetrics) int {
+func (*mockMetricsSizer) ResourceMetricsSize(pmetric.ResourceMetrics) int {
 	return 0
 }
 
-func (*mockMetricsSizer) ScopeMetricsSize(_ pmetric.ScopeMetrics) int {
+func (*mockMetricsSizer) ScopeMetricsSize(pmetric.ScopeMetrics) int {
 	return 0
 }
 

@@ -44,7 +44,7 @@ func (*ProfilesCountSizer) ScopeProfilesSize(sp pprofile.ScopeProfiles) int {
 	return sp.Profiles().Len()
 }
 
-func (*ProfilesCountSizer) ProfileSize(_ pprofile.Profile) int {
+func (*ProfilesCountSizer) ProfileSize(pprofile.Profile) int {
 	return 1
 }
 

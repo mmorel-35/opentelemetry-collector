@@ -103,7 +103,7 @@ func (xptr *exampleExporter) consumeMetrics(_ context.Context, md pmetric.Metric
 }
 
 // Shutdown properly stops the exporter and releases resources.
-func (xptr *exampleExporter) shutdown(_ context.Context) error {
+func (xptr *exampleExporter) shutdown(context.Context) error {
 	xptr.cancel()
 	return nil
 }

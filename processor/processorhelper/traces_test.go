@@ -107,7 +107,7 @@ func TestTracesConcurrency(t *testing.T) {
 
 func TestTraces_RecordInOut(t *testing.T) {
 	// Regardless of how many spans are ingested, emit just one
-	mockAggregate := func(_ context.Context, _ ptrace.Traces) (ptrace.Traces, error) {
+	mockAggregate := func(context.Context, ptrace.Traces) (ptrace.Traces, error) {
 		td := ptrace.NewTraces()
 		td.ResourceSpans().AppendEmpty().ScopeSpans().AppendEmpty().Spans().AppendEmpty()
 		return td, nil
@@ -148,7 +148,7 @@ func TestTraces_RecordInOut(t *testing.T) {
 
 func TestTraces_RecordIn_ErrorOut(t *testing.T) {
 	// Regardless of input, return error
-	mockErr := func(_ context.Context, _ ptrace.Traces) (ptrace.Traces, error) {
+	mockErr := func(context.Context, ptrace.Traces) (ptrace.Traces, error) {
 		return ptrace.NewTraces(), errors.New("fake")
 	}
 

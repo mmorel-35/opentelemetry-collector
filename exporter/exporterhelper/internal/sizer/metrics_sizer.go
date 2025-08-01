@@ -68,18 +68,18 @@ func (*MetricsCountSizer) DeltaSize(newItemSize int) int {
 	return newItemSize
 }
 
-func (*MetricsCountSizer) NumberDataPointSize(_ pmetric.NumberDataPoint) int {
+func (*MetricsCountSizer) NumberDataPointSize(pmetric.NumberDataPoint) int {
 	return 1
 }
 
-func (*MetricsCountSizer) HistogramDataPointSize(_ pmetric.HistogramDataPoint) int {
+func (*MetricsCountSizer) HistogramDataPointSize(pmetric.HistogramDataPoint) int {
 	return 1
 }
 
-func (*MetricsCountSizer) ExponentialHistogramDataPointSize(_ pmetric.ExponentialHistogramDataPoint) int {
+func (*MetricsCountSizer) ExponentialHistogramDataPointSize(pmetric.ExponentialHistogramDataPoint) int {
 	return 1
 }
 
-func (*MetricsCountSizer) SummaryDataPointSize(_ pmetric.SummaryDataPoint) int {
+func (*MetricsCountSizer) SummaryDataPointSize(pmetric.SummaryDataPoint) int {
 	return 1
 }

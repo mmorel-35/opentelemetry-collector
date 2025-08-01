@@ -23,7 +23,7 @@ type ValidateTestConfig struct {
 
 var genericType component.Type = component.MustNewType("generic")
 
-func NewFactories(_ *testing.T) func() (Factories, error) {
+func NewFactories(*testing.T) func() (Factories, error) {
 	return func() (Factories, error) {
 		factories, err := nopFactories()
 		if err != nil {
@@ -95,7 +95,7 @@ func TestDryRunWithExpandedValues(t *testing.T) {
 							newFakeProvider("mock", func(_ context.Context, uri string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
 								return confmap.NewRetrievedFromYAML([]byte(tt.mockMap[uri[len("mock:"):]]))
 							}),
-							newFakeProvider("file", func(_ context.Context, _ string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
+							newFakeProvider("file", func(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
 								return confmap.NewRetrievedFromYAML([]byte(tt.yamlConfig))
 							}),
 						},

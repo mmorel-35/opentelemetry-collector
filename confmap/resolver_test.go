@@ -55,7 +55,7 @@ func (m *mockProvider) Shutdown(context.Context) error {
 }
 
 func newMockProvider(m *mockProvider) ProviderFactory {
-	return NewProviderFactory(func(_ ProviderSettings) Provider {
+	return NewProviderFactory(func(ProviderSettings) Provider {
 		return m
 	})
 }
@@ -216,12 +216,12 @@ func TestResolverErrors(t *testing.T) {
 			mockProviderFuncs := make([]ProviderFactory, len(tt.providers))
 			for i, provider := range tt.providers {
 				p := provider
-				mockProviderFuncs[i] = NewProviderFactory(func(_ ProviderSettings) Provider { return p })
+				mockProviderFuncs[i] = NewProviderFactory(func(ProviderSettings) Provider { return p })
 			}
 			converterFuncs := make([]ConverterFactory, len(tt.converters))
 			for i, converter := range tt.converters {
 				c := converter
-				converterFuncs[i] = NewConverterFactory(func(_ ConverterSettings) Converter { return c })
+				converterFuncs[i] = NewConverterFactory(func(ConverterSettings) Converter { return c })
 			}
 			resolver, err := NewResolver(ResolverSettings{URIs: tt.locations, ProviderFactories: mockProviderFuncs, DefaultScheme: tt.defaultScheme, ConverterFactories: converterFuncs})
 			if tt.expectBuildErr {

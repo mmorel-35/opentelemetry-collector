@@ -56,7 +56,7 @@ receivers:
 
 func TestAddFlagToSettings(t *testing.T) {
 	filePath := filepath.Join("testdata", "otelcol-invalid.yaml")
-	fileProvider := newFakeProvider("file", func(_ context.Context, _ string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
+	fileProvider := newFakeProvider("file", func(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
 		return confmap.NewRetrieved(newConfFromFile(t, filePath))
 	})
 	set := CollectorSettings{
@@ -91,7 +91,7 @@ func TestInvalidCollectorSettings(t *testing.T) {
 
 func TestNewCommandInvalidComponent(t *testing.T) {
 	filePath := filepath.Join("testdata", "otelcol-invalid.yaml")
-	fileProvider := newFakeProvider("file", func(_ context.Context, _ string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
+	fileProvider := newFakeProvider("file", func(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
 		return confmap.NewRetrieved(newConfFromFile(t, filePath))
 	})
 	set := ConfigProviderSettings{
@@ -140,7 +140,7 @@ func Test_UseUnifiedEnvVarExpansionRules(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			fileProvider := newFakeProvider("file", func(_ context.Context, _ string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
+			fileProvider := newFakeProvider("file", func(context.Context, string, confmap.WatcherFunc) (*confmap.Retrieved, error) {
 				return &confmap.Retrieved{}, nil
 			})
 			set := CollectorSettings{

@@ -26,7 +26,7 @@ type mockTracesConsumer struct {
 	capabilities consumer.Capabilities
 }
 
-func (m *mockTracesConsumer) ConsumeTraces(_ context.Context, _ ptrace.Traces) error {
+func (m *mockTracesConsumer) ConsumeTraces(context.Context, ptrace.Traces) error {
 	return m.err
 }
 

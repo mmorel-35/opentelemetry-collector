@@ -423,7 +423,7 @@ func newPushLogsDataModifiedDownstream(retError error) consumer.ConsumeLogsFunc 
 }
 
 func newPushLogsData(retError error) consumer.ConsumeLogsFunc {
-	return func(_ context.Context, _ plog.Logs) error {
+	return func(context.Context, plog.Logs) error {
 		return retError
 	}
 }

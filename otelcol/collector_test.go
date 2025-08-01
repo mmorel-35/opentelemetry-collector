@@ -515,7 +515,7 @@ func startCollector(ctx context.Context, t *testing.T, col *Collector) *sync.Wai
 
 type failureProvider struct{}
 
-func newFailureProvider(_ confmap.ProviderSettings) confmap.Provider {
+func newFailureProvider(confmap.ProviderSettings) confmap.Provider {
 	return &failureProvider{}
 }
 

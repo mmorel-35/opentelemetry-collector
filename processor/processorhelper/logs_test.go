@@ -107,7 +107,7 @@ func TestLogsConcurrency(t *testing.T) {
 
 func TestLogs_RecordInOut(t *testing.T) {
 	// Regardless of how many logs are ingested, emit just one
-	mockAggregate := func(_ context.Context, _ plog.Logs) (plog.Logs, error) {
+	mockAggregate := func(context.Context, plog.Logs) (plog.Logs, error) {
 		ld := plog.NewLogs()
 		ld.ResourceLogs().AppendEmpty().ScopeLogs().AppendEmpty().LogRecords().AppendEmpty()
 		return ld, nil
@@ -147,7 +147,7 @@ func TestLogs_RecordInOut(t *testing.T) {
 
 func TestLogs_RecordIn_ErrorOut(t *testing.T) {
 	// Regardless of input, return error
-	mockErr := func(_ context.Context, _ plog.Logs) (plog.Logs, error) {
+	mockErr := func(context.Context, plog.Logs) (plog.Logs, error) {
 		return plog.NewLogs(), errors.New("fake")
 	}
 

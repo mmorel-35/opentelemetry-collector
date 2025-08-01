@@ -9,4 +9,4 @@ import (
 
 // MigrateProfiles implements any translation needed due to deprecation in OTLP profiles protocol.
 // Any pprofile.Unmarshaler implementation from OTLP (proto/json) MUST call this, and the gRPC Server implementation.
-func MigrateProfiles(_ []*otlpprofiles.ResourceProfiles) {}
+func MigrateProfiles([]*otlpprofiles.ResourceProfiles) {}

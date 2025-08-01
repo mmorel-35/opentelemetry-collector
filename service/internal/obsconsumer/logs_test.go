@@ -26,7 +26,7 @@ type mockLogsConsumer struct {
 	capabilities consumer.Capabilities
 }
 
-func (m *mockLogsConsumer) ConsumeLogs(_ context.Context, _ plog.Logs) error {
+func (m *mockLogsConsumer) ConsumeLogs(context.Context, plog.Logs) error {
 	return m.err
 }
 

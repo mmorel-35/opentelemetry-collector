@@ -80,7 +80,7 @@ func TestMetricsConcurrency(t *testing.T) {
 }
 
 func newTestScrapeMetricsFunc(retError error) ScrapeMetricsFunc {
-	return func(_ context.Context) (pmetric.Metrics, error) {
+	return func(context.Context) (pmetric.Metrics, error) {
 		return pmetric.NewMetrics(), retError
 	}
 }

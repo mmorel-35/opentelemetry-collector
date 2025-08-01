@@ -90,7 +90,7 @@ func NewMemoryLimiter(cfg *Config, logger *zap.Logger) (*MemoryLimiter, error) {
 	}, nil
 }
 
-func (ml *MemoryLimiter) Start(_ context.Context, _ component.Host) error {
+func (ml *MemoryLimiter) Start(context.Context, component.Host) error {
 	ml.refCounterLock.Lock()
 	defer ml.refCounterLock.Unlock()
 

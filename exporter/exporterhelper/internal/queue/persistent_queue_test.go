@@ -841,7 +841,7 @@ func TestItemIndexArrayMarshaling(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		t.Run(fmt.Sprintf("#elements:%v", c.in), func(_ *testing.T) {
+		t.Run(fmt.Sprintf("#elements:%v", c.in), func(*testing.T) {
 			buf := itemIndexArrayToBytes(c.in)
 			out, err := bytesToItemIndexArray(buf)
 			require.NoError(t, err)

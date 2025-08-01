@@ -93,7 +93,7 @@ func (*exampleProcessor) consumeMetrics(_ context.Context, md pmetric.Metrics) (
 }
 
 // Shutdown properly stops the processor and releases resources.
-func (pcsr *exampleProcessor) shutdown(_ context.Context) error {
+func (pcsr *exampleProcessor) shutdown(context.Context) error {
 	pcsr.cancel()
 	return nil
 }

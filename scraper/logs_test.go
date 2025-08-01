@@ -73,7 +73,7 @@ func TestLogsConcurrency(t *testing.T) {
 }
 
 func newTestScrapeLogsFunc(retError error) ScrapeLogsFunc {
-	return func(_ context.Context) (plog.Logs, error) {
+	return func(context.Context) (plog.Logs, error) {
 		return plog.NewLogs(), retError
 	}
 }

@@ -26,7 +26,7 @@ type mockProfilesConsumer struct {
 	capabilities consumer.Capabilities
 }
 
-func (m *mockProfilesConsumer) ConsumeProfiles(_ context.Context, _ pprofile.Profiles) error {
+func (m *mockProfilesConsumer) ConsumeProfiles(context.Context, pprofile.Profiles) error {
 	return m.err
 }
 

@@ -462,17 +462,17 @@ func (ec *EmbeddedConfig2) Unmarshal(component *Conf) error {
 
 type EmbeddedConfigWithError struct{}
 
-func (*EmbeddedConfigWithError) Unmarshal(_ *Conf) error {
+func (*EmbeddedConfigWithError) Unmarshal(*Conf) error {
 	return errors.New("embedded error")
 }
 
 type EmbeddedConfigWithMarshalError struct{}
 
-func (EmbeddedConfigWithMarshalError) Marshal(_ *Conf) error {
+func (EmbeddedConfigWithMarshalError) Marshal(*Conf) error {
 	return errors.New("marshaling error")
 }
 
-func (EmbeddedConfigWithMarshalError) Unmarshal(_ *Conf) error {
+func (EmbeddedConfigWithMarshalError) Unmarshal(*Conf) error {
 	return nil
 }
 

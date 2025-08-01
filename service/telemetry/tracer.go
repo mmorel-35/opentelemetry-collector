@@ -46,7 +46,7 @@ type noopNoContextTracerProvider struct {
 	embedded.TracerProvider
 }
 
-func (*noopNoContextTracerProvider) Tracer(_ string, _ ...trace.TracerOption) trace.Tracer {
+func (*noopNoContextTracerProvider) Tracer(string, ...trace.TracerOption) trace.Tracer {
 	return &noopNoContextTracer{}
 }
 

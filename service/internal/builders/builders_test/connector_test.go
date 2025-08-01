@@ -108,7 +108,7 @@ func TestConnectorBuilder(t *testing.T) {
 		{
 			name: "no next consumer",
 			id:   component.MustNewID("unknown"),
-			err: func(_, _ pipeline.Signal) string {
+			err: func(pipeline.Signal, pipeline.Signal) string {
 				return "nil next Consumer"
 			},
 			nextTraces:   nil,

@@ -41,7 +41,7 @@ func (*TracesCountSizer) ScopeSpansSize(ss ptrace.ScopeSpans) int {
 	return ss.Spans().Len()
 }
 
-func (*TracesCountSizer) SpanSize(_ ptrace.Span) int {
+func (*TracesCountSizer) SpanSize(ptrace.Span) int {
 	return 1
 }
 

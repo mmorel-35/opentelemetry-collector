@@ -31,7 +31,7 @@ func (mockFileProvider) Scheme() string {
 	return "file"
 }
 
-func (mockFileProvider) Shutdown(_ context.Context) error {
+func (mockFileProvider) Shutdown(context.Context) error {
 	return nil
 }
 
@@ -52,7 +52,7 @@ func (mockExpandProvider) Scheme() string {
 	return "expand"
 }
 
-func (mockExpandProvider) Shutdown(_ context.Context) error {
+func (mockExpandProvider) Shutdown(context.Context) error {
 	return nil
 }
 
@@ -78,15 +78,15 @@ func Example() {
 	resolver, err := confmap.NewResolver(confmap.ResolverSettings{
 		URIs: []string{"file:mock-file"},
 		ProviderFactories: []confmap.ProviderFactory{
-			confmap.NewProviderFactory(func(_ confmap.ProviderSettings) confmap.Provider {
+			confmap.NewProviderFactory(func(confmap.ProviderSettings) confmap.Provider {
 				return &mockFileProvider{}
 			}),
-			confmap.NewProviderFactory(func(_ confmap.ProviderSettings) confmap.Provider {
+			confmap.NewProviderFactory(func(confmap.ProviderSettings) confmap.Provider {
 				return &mockExpandProvider{}
 			}),
 		},
 		ConverterFactories: []confmap.ConverterFactory{
-			confmap.NewConverterFactory(func(_ confmap.ConverterSettings) confmap.Converter {
+			confmap.NewConverterFactory(func(confmap.ConverterSettings) confmap.Converter {
 				return &mockUpperCaseConverter{}
 			}),
 		},

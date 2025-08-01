@@ -105,7 +105,7 @@ func TestMetricsConcurrency(t *testing.T) {
 
 func TestMetrics_RecordInOut(t *testing.T) {
 	// Regardless of how many data points are ingested, emit 3
-	mockAggregate := func(_ context.Context, _ pmetric.Metrics) (pmetric.Metrics, error) {
+	mockAggregate := func(context.Context, pmetric.Metrics) (pmetric.Metrics, error) {
 		md := pmetric.NewMetrics()
 		md.ResourceMetrics().AppendEmpty().ScopeMetrics().AppendEmpty().Metrics().AppendEmpty().SetEmptySum().DataPoints().AppendEmpty()
 		md.ResourceMetrics().AppendEmpty().ScopeMetrics().AppendEmpty().Metrics().AppendEmpty().SetEmptySum().DataPoints().AppendEmpty()
@@ -146,7 +146,7 @@ func TestMetrics_RecordInOut(t *testing.T) {
 
 func TestMetrics_RecordIn_ErrorOut(t *testing.T) {
 	/// Regardless of input, return error
-	mockErr := func(_ context.Context, _ pmetric.Metrics) (pmetric.Metrics, error) {
+	mockErr := func(context.Context, pmetric.Metrics) (pmetric.Metrics, error) {
 		return pmetric.NewMetrics(), errors.New("fake")
 	}
 

@@ -34,7 +34,7 @@ func TestGetHTTPRoundTripperFunc(t *testing.T) {
 
 	t.Run("error function", func(t *testing.T) {
 		expectedErr := errors.New("round tripper error")
-		errorFunc := GetHTTPRoundTripperFunc(func(_ http.RoundTripper) (http.RoundTripper, error) {
+		errorFunc := GetHTTPRoundTripperFunc(func(http.RoundTripper) (http.RoundTripper, error) {
 			return nil, expectedErr
 		})
 

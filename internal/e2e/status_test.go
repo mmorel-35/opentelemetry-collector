@@ -182,7 +182,7 @@ func (*testReceiver) Start(_ context.Context, host component.Host) error {
 	return nil
 }
 
-func (*testReceiver) Shutdown(_ context.Context) error {
+func (*testReceiver) Shutdown(context.Context) error {
 	return nil
 }
 
@@ -263,12 +263,12 @@ func createDefaultExtensionConfig() component.Config {
 }
 
 // Start implements the component.Component interface.
-func (*testExtension) Start(_ context.Context, _ component.Host) error {
+func (*testExtension) Start(context.Context, component.Host) error {
 	return nil
 }
 
 // Shutdown implements the component.Component interface.
-func (*testExtension) Shutdown(_ context.Context) error {
+func (*testExtension) Shutdown(context.Context) error {
 	return nil
 }
 
@@ -283,7 +283,7 @@ func (t *testExtension) ComponentStatusChanged(
 }
 
 // NotifyConfig implements the extensioncapabilities.ConfigWatcher interface.
-func (*testExtension) NotifyConfig(_ context.Context, _ *confmap.Conf) error {
+func (*testExtension) NotifyConfig(context.Context, *confmap.Conf) error {
 	return nil
 }
 

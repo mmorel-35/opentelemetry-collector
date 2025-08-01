@@ -39,19 +39,19 @@ func (*failingConsumer) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{}
 }
 
-func (fc *failingConsumer) ConsumeMetrics(_ context.Context, _ pmetric.Metrics) error {
+func (fc *failingConsumer) ConsumeMetrics(context.Context, pmetric.Metrics) error {
 	return fc.err
 }
 
-func (fc *failingConsumer) ConsumeLogs(_ context.Context, _ plog.Logs) error {
+func (fc *failingConsumer) ConsumeLogs(context.Context, plog.Logs) error {
 	return fc.err
 }
 
-func (fc *failingConsumer) ConsumeTraces(_ context.Context, _ ptrace.Traces) error {
+func (fc *failingConsumer) ConsumeTraces(context.Context, ptrace.Traces) error {
 	return fc.err
 }
 
-func (fc *failingConsumer) ConsumeProfiles(_ context.Context, _ pprofile.Profiles) error {
+func (fc *failingConsumer) ConsumeProfiles(context.Context, pprofile.Profiles) error {
 	return fc.err
 }
 
@@ -64,7 +64,7 @@ func TestConsumeRefused(t *testing.T) {
 	mockConsumer := &failingConsumer{err: originalErr}
 
 	// Use delta temporality so sums don't accumulate across tests
-	reader := sdkmetric.NewManualReader(sdkmetric.WithTemporalitySelector(func(_ sdkmetric.InstrumentKind) metricdata.Temporality {
+	reader := sdkmetric.NewManualReader(sdkmetric.WithTemporalitySelector(func(sdkmetric.InstrumentKind) metricdata.Temporality {
 		return metricdata.DeltaTemporality
 	}))
 	mp := sdkmetric.NewMeterProvider(sdkmetric.WithReader(reader))

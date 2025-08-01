@@ -421,7 +421,7 @@ func TestMetricsRequest_WithShutdown_ReturnError(t *testing.T) {
 }
 
 func newPushMetricsData(retError error) consumer.ConsumeMetricsFunc {
-	return func(_ context.Context, _ pmetric.Metrics) error {
+	return func(context.Context, pmetric.Metrics) error {
 		return retError
 	}
 }

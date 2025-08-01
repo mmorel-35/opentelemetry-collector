@@ -55,7 +55,7 @@ func (rcvr *exampleReceiver) Start(ctx context.Context, host component.Host) err
 	return nil
 }
 
-func (rcvr *exampleReceiver) Shutdown(_ context.Context) error {
+func (rcvr *exampleReceiver) Shutdown(context.Context) error {
 	if rcvr.cancel != nil {
 		rcvr.cancel()
 	}

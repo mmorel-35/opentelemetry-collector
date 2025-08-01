@@ -118,7 +118,7 @@ func (*reporter) GetExtensions() map[component.ID]component.Component {
 	return nil
 }
 
-func (r *reporter) Report(_ *Event) {
+func (r *reporter) Report(*Event) {
 	r.reportStatusCalled = true
 }
 

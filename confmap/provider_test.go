@@ -18,7 +18,7 @@ import (
 // The example is useful for implementing Providers of configuration that changes over time.
 type UpdatingProvider struct{}
 
-func (UpdatingProvider) getCurrentConfig(_ string) any {
+func (UpdatingProvider) getCurrentConfig(string) any {
 	return "hello"
 }
 
@@ -26,7 +26,7 @@ func (p UpdatingProvider) Retrieve(ctx context.Context, uri string, watcher Watc
 	ticker := time.NewTicker(1 * time.Second)
 	stop := make(chan bool, 1)
 
-	retrieved, err := NewRetrieved(p.getCurrentConfig(uri), WithRetrievedClose(func(_ context.Context) error {
+	retrieved, err := NewRetrieved(p.getCurrentConfig(uri), WithRetrievedClose(func(context.Context) error {
 		// the retriever should call this function when it no longer wants config updates
 		ticker.Stop()
 		stop <- true
@@ -64,7 +64,7 @@ func ExampleProvider() {
 
 	receivedNotification := make(chan bool)
 
-	watcherFunc := func(_ *ChangeEvent) {
+	watcherFunc := func(*ChangeEvent) {
 		fmt.Println("received notification of new config")
 		receivedNotification <- true
 	}

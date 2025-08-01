@@ -26,7 +26,7 @@ type mockMetricsConsumer struct {
 	capabilities consumer.Capabilities
 }
 
-func (m *mockMetricsConsumer) ConsumeMetrics(_ context.Context, _ pmetric.Metrics) error {
+func (m *mockMetricsConsumer) ConsumeMetrics(context.Context, pmetric.Metrics) error {
 	return m.err
 }
 

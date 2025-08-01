@@ -9,7 +9,7 @@ import (
 	otlpprofiles "go.opentelemetry.io/collector/pdata/internal/data/protogen/profiles/v1development"
 )
 
-func TestMigrateProfiles(_ *testing.T) {
+func TestMigrateProfiles(*testing.T) {
 	rps := []*otlpprofiles.ResourceProfiles{
 		{},
 	}
