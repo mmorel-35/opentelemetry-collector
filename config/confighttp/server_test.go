@@ -260,7 +260,9 @@ func TestHttpReception(t *testing.T) {
 				client.Transport.(*http.Transport).ForceAttemptHTTP2 = false
 			}
 
-			resp, errResp := client.Get(cc.Endpoint)
+			req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, cc.Endpoint, http.NoBody)
+			require.NoError(t, err, "Error creating request")
+			resp, errResp := client.Do(req)
 			if tt.hasError {
 				require.Error(t, errResp)
 			} else {
@@ -481,7 +483,7 @@ func TestHttpServerHeaders(t *testing.T) {
 }
 
 func verifyCorsResp(t *testing.T, url, origin string, set configoptional.Optional[CORSConfig], extraHeader bool, wantStatus int, wantAllowed bool) {
-	req, err := http.NewRequest(http.MethodOptions, url, http.NoBody)
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodOptions, url, http.NoBody)
 	require.NoError(t, err, "Error creating trace OPTIONS request: %v", err)
 	req.Header.Set("Origin", origin)
 	if extraHeader {
@@ -516,7 +518,7 @@ func verifyCorsResp(t *testing.T, url, origin string, set configoptional.Optiona
 }
 
 func verifyHeadersResp(t *testing.T, url string, expected map[string]configopaque.String) {
-	req, err := http.NewRequest(http.MethodGet, url, http.NoBody)
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, url, http.NoBody)
 	require.NoError(t, err, "Error creating request")
 
 	resp, err := http.DefaultClient.Do(req)
@@ -672,7 +674,7 @@ func TestServerWithErrorHandler(t *testing.T) {
 	// tt
 	response := &httptest.ResponseRecorder{}
 
-	req, err := http.NewRequest(http.MethodGet, srv.Addr, http.NoBody)
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.Addr, http.NoBody)
 	require.NoError(t, err, "Error creating request: %v", err)
 	req.Header.Set("Content-Encoding", "something-invalid")
 
@@ -700,7 +702,7 @@ func TestServerWithDecoder(t *testing.T) {
 	// tt
 	response := &httptest.ResponseRecorder{}
 
-	req, err := http.NewRequest(http.MethodGet, srv.Addr, bytes.NewBuffer([]byte("something")))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.Addr, bytes.NewBuffer([]byte("something")))
 	require.NoError(t, err, "Error creating request: %v", err)
 	req.Header.Set("Content-Encoding", "something-else")
 
@@ -737,7 +739,7 @@ func TestServerWithDecompression(t *testing.T) {
 	testSrv := httptest.NewServer(srv.Handler)
 	defer testSrv.Close()
 
-	req, err := http.NewRequest(http.MethodGet, testSrv.URL, compressZstd(t, body))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, testSrv.URL, compressZstd(t, body))
 	require.NoError(t, err, "Error creating request: %v", err)
 
 	req.Header.Set("Content-Encoding", "zstd")
@@ -933,7 +935,9 @@ func BenchmarkHttpRequest(b *testing.B) {
 				}
 
 				for pb.Next() {
-					resp, errResp := c.Get(cc.Endpoint)
+					req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, cc.Endpoint, http.NoBody)
+					require.NoError(b, err)
+					resp, errResp := c.Do(req)
 					require.NoError(b, errResp)
 					body, errRead := io.ReadAll(resp.Body)
 					_ = resp.Body.Close()
@@ -1004,7 +1008,9 @@ func TestHTTPServerTelemetry_Tracing(t *testing.T) {
 				<-done
 			}()
 
-			resp, err := http.Get(fmt.Sprintf("http://%s/b/bucket123/o/object456/segment", lis.Addr()))
+			req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, fmt.Sprintf("http://%s/b/bucket123/o/object456/segment", lis.Addr()), http.NoBody)
+			require.NoError(t, err, "Error creating request")
+			resp, err := http.DefaultClient.Do(req)
 			require.NoError(t, err)
 			require.Equal(t, http.StatusOK, resp.StatusCode)
 			resp.Body.Close()

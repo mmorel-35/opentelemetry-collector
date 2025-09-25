@@ -533,7 +533,7 @@ func TestHttpClientHeaders(t *testing.T) {
 				Headers:         tt.headers,
 			}
 			client, _ := setting.ToClient(context.Background(), componenttest.NewNopHost(), componenttest.NewNopTelemetrySettings())
-			req, err := http.NewRequest(http.MethodGet, setting.Endpoint, http.NoBody)
+			req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, setting.Endpoint, http.NoBody)
 			require.NoError(t, err)
 			_, err = client.Do(req)
 			assert.NoError(t, err)
@@ -569,7 +569,7 @@ func TestHttpClientHostHeader(t *testing.T) {
 			Headers:         tt.headers,
 		}
 		client, _ := setting.ToClient(context.Background(), componenttest.NewNopHost(), componenttest.NewNopTelemetrySettings())
-		req, err := http.NewRequest(http.MethodGet, setting.Endpoint, http.NoBody)
+		req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, setting.Endpoint, http.NoBody)
 		require.NoError(t, err)
 		_, err = client.Do(req)
 		assert.NoError(t, err)

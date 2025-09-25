@@ -38,6 +38,7 @@ linters:
     - gosec
     - govet
     - misspell
+    - noctx
     - nolintlint
     - perfsprint
     - revive

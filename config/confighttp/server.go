@@ -118,7 +118,8 @@ type AuthConfig struct {
 
 // ToListener creates a net.Listener.
 func (sc *ServerConfig) ToListener(ctx context.Context) (net.Listener, error) {
-	listener, err := net.Listen("tcp", sc.Endpoint)
+	lc := &net.ListenConfig{}
+	listener, err := lc.Listen(ctx, "tcp", sc.Endpoint)
 	if err != nil {
 		return nil, err
 	}

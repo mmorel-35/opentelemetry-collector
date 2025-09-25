@@ -389,7 +389,11 @@ func testCollectorStartHelperWithReaders(t *testing.T, tc ownMetricsTestCase, me
 		// Wait for the HTTP server to start.
 		promHost := fmt.Sprintf("%s:%d", *metricsAddr.Host, *metricsAddr.Port)
 		require.Eventually(t, func() bool {
-			resp, err := http.Get("http://" + promHost + "/metrics")
+			req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, "http://"+promHost+"/metrics", http.NoBody)
+			if err != nil {
+				return false
+			}
+			resp, err := http.DefaultClient.Do(req)
 			if err != nil {
 				return false
 			}
@@ -453,7 +457,11 @@ func zpagesHealthy(zpagesAddr string) bool {
 	}
 
 	for _, path := range paths {
-		resp, err := http.Get("http://" + zpagesAddr + path)
+		req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, "http://"+zpagesAddr+path, http.NoBody)
+		if err != nil {
+			return false
+		}
+		resp, err := http.DefaultClient.Do(req)
 		if err != nil {
 			return false
 		}
@@ -490,11 +498,13 @@ func TestServiceTelemetryRestart(t *testing.T) {
 	// Start the service
 	require.NoError(t, srvOne.Start(context.Background()))
 
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, telemetryURL, http.NoBody)
+	require.NoError(t, err)
+
 	// check telemetry server to ensure we get a response
 	var resp *http.Response
 
-	//nolint:gosec
-	resp, err = http.Get(telemetryURL)
+	resp, err = http.DefaultClient.Do(req)
 	assert.NoError(t, err)
 	assert.NoError(t, resp.Body.Close())
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
@@ -517,7 +527,10 @@ func TestServiceTelemetryRestart(t *testing.T) {
 	require.Eventually(t,
 		func() bool {
 			//nolint:gosec
-			resp, err = http.Get(telemetryURL)
+			req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, telemetryURL, http.NoBody)
+			require.NoError(t, err)
+
+			resp, err = http.DefaultClient.Do(req)
 			assert.NoError(t, resp.Body.Close())
 			return err == nil
 		},
@@ -737,8 +750,11 @@ func assertResourceLabels(t *testing.T, res pcommon.Resource, expectedLabels map
 }
 
 func assertMetrics(t *testing.T, metricsAddr string, expectedLabels map[string]labelValue) {
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, "http://"+metricsAddr+"/metrics", http.NoBody)
+	require.NoError(t, err)
+
 	client := &http.Client{}
-	resp, err := client.Get("http://" + metricsAddr + "/metrics")
+	resp, err := client.Do(req)
 	require.NoError(t, err)
 
 	t.Cleanup(func() {

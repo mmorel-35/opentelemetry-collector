@@ -164,7 +164,7 @@ func TestHTTPClientCompression(t *testing.T) {
 
 			reqBody := bytes.NewBuffer(testBody)
 
-			req, err := http.NewRequest(http.MethodGet, srv.URL, reqBody)
+			req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL, reqBody)
 			require.NoError(t, err, "failed to create request to test handler")
 			clientSettings := ClientConfig{
 				Endpoint:          srv.URL,
@@ -217,7 +217,7 @@ func TestHTTPCustomDecompression(t *testing.T) {
 
 	t.Cleanup(srv.Close)
 
-	req, err := http.NewRequest(http.MethodGet, srv.URL, bytes.NewBuffer([]byte("123decompressed body")))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL, bytes.NewBuffer([]byte("123decompressed body")))
 	require.NoError(t, err, "failed to create request to test handler")
 	req.Header.Set("Content-Encoding", "custom-encoding")
 
@@ -368,7 +368,7 @@ func TestHTTPContentDecompressionHandler(t *testing.T) {
 			}), defaultMaxRequestBodySize, defaultErrorHandler, defaultCompressionAlgorithms(), noDecoders))
 			t.Cleanup(srv.Close)
 
-			req, err := http.NewRequest(http.MethodGet, srv.URL, tt.reqBody)
+			req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL, tt.reqBody)
 			require.NoError(t, err, "failed to create request to test handler")
 			req.Header.Set("Content-Encoding", tt.encoding)
 
@@ -396,7 +396,7 @@ func TestHTTPContentCompressionRequestWithNilBody(t *testing.T) {
 	}))
 	defer srv.Close()
 
-	req, err := http.NewRequest(http.MethodGet, srv.URL, http.NoBody)
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL, http.NoBody)
 	require.NoError(t, err, "failed to create request to test handler")
 
 	client := srv.Client()
@@ -417,7 +417,7 @@ func TestHTTPContentCompressionCopyError(t *testing.T) {
 	}))
 	t.Cleanup(srv.Close)
 
-	req, err := http.NewRequest(http.MethodGet, srv.URL, iotest.ErrReader(errors.New("read failed")))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL, iotest.ErrReader(errors.New("read failed")))
 	require.NoError(t, err)
 
 	client := srv.Client()
@@ -442,7 +442,7 @@ func TestHTTPContentCompressionRequestBodyCloseError(t *testing.T) {
 	}))
 	t.Cleanup(srv.Close)
 
-	req, err := http.NewRequest(http.MethodGet, srv.URL, &closeFailBody{Buffer: bytes.NewBuffer([]byte("blank"))})
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL, &closeFailBody{Buffer: bytes.NewBuffer([]byte("blank"))})
 	require.NoError(t, err)
 
 	client := srv.Client()
@@ -462,7 +462,7 @@ func TestOverrideCompressionList(t *testing.T) {
 	}), defaultMaxRequestBodySize, defaultErrorHandler, configuredDecoders, nil))
 	t.Cleanup(srv.Close)
 
-	req, err := http.NewRequest(http.MethodGet, srv.URL, compressSnappyFramed(t, []byte("123decompressed body")))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL, compressSnappyFramed(t, []byte("123decompressed body")))
 	require.NoError(t, err, "failed to create request to test handler")
 	req.Header.Set("Content-Encoding", "snappy")
 

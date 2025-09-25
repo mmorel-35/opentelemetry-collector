@@ -69,8 +69,11 @@ func TestZPagesExtensionUsage(t *testing.T) {
 	_, zpagesPort, err := net.SplitHostPort(cfg.Endpoint)
 	require.NoError(t, err)
 
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, "http://localhost:"+zpagesPort+"/debug/tracez", http.NoBody)
+	require.NoError(t, err)
+
 	client := &http.Client{}
-	resp, err := client.Get("http://localhost:" + zpagesPort + "/debug/tracez")
+	resp, err := client.Do(req)
 	require.NoError(t, err)
 	defer resp.Body.Close()
 
@@ -94,7 +97,8 @@ func TestZPagesExtensionBadAuthExtension(t *testing.T) {
 
 func TestZPagesExtensionPortAlreadyInUse(t *testing.T) {
 	endpoint := testutil.GetAvailableLocalAddress(t)
-	ln, err := net.Listen("tcp", endpoint)
+	lc := &net.ListenConfig{}
+	ln, err := lc.Listen(t.Context(), "tcp", endpoint)
 	require.NoError(t, err)
 	defer ln.Close()
 
@@ -176,8 +180,11 @@ func TestZPagesEnableExpvar(t *testing.T) {
 	_, zpagesPort, err := net.SplitHostPort(cfg.Endpoint)
 	require.NoError(t, err)
 
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, "http://localhost:"+zpagesPort+"/debug/expvarz", http.NoBody)
+	require.NoError(t, err)
+
 	client := &http.Client{}
-	resp, err := client.Get("http://localhost:" + zpagesPort + "/debug/expvarz")
+	resp, err := client.Do(req)
 	require.NoError(t, err)
 	defer resp.Body.Close()
 

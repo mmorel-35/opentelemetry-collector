@@ -57,7 +57,7 @@ jobs:
             ~/go/pkg/mod
           key: go-cache-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/go.sum') }}
       - name: golint
-        run: make -j2 golint
+        run: make -j2 -k golint
       - name: goimpi
         run: make goimpi
 

@@ -39,8 +39,13 @@ import (
 )
 
 func assertMetrics(t *testing.T, metricsAddr string, expectedMetrics map[string]bool) bool {
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, fmt.Sprintf("http://%s/metrics", metricsAddr), http.NoBody)
+	if err != nil {
+		return false
+	}
+
 	client := &http.Client{}
-	resp, err := client.Get(fmt.Sprintf("http://%s/metrics", metricsAddr))
+	resp, err := client.Do(req)
 	if err != nil {
 		return false
 	}
@@ -230,7 +235,12 @@ func testMetricStability(t *testing.T, configFile string, expectedMetrics map[st
 	}()
 
 	require.Eventually(t, func() bool {
-		resp, err := http.Get(fmt.Sprintf("http://localhost:%s/metrics", metricsPort))
+		req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, fmt.Sprintf("http://localhost:%s/metrics", metricsPort), http.NoBody)
+		if err != nil {
+			return false
+		}
+
+		resp, err := http.DefaultClient.Do(req)
 		if err != nil {
 			return false
 		}
@@ -248,12 +258,12 @@ func testMetricStability(t *testing.T, configFile string, expectedMetrics map[st
 }
 
 func sendTestData(t *testing.T, otelPort string) {
-	require.NoError(t, sendTestMetrics(otelPort))
-	require.NoError(t, sendTestTraces(otelPort))
-	require.NoError(t, sendTestLogs(otelPort))
+	require.NoError(t, sendTestMetrics(t, otelPort))
+	require.NoError(t, sendTestTraces(t, otelPort))
+	require.NoError(t, sendTestLogs(t, otelPort))
 }
 
-func sendTestMetrics(otelPort string) error {
+func sendTestMetrics(t *testing.T, otelPort string) error {
 	metrics := pmetric.NewMetrics()
 	rm := metrics.ResourceMetrics().AppendEmpty()
 	sm := rm.ScopeMetrics().AppendEmpty()
@@ -273,7 +283,7 @@ func sendTestMetrics(otelPort string) error {
 		return fmt.Errorf("failed to marshal metrics: %w", err)
 	}
 
-	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("http://localhost:%s/v1/metrics", otelPort), bytes.NewReader(metricsBytes))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodPost, fmt.Sprintf("http://localhost:%s/v1/metrics", otelPort), bytes.NewReader(metricsBytes))
 	if err != nil {
 		return fmt.Errorf("failed to create metrics request: %w", err)
 	}
@@ -288,7 +298,7 @@ func sendTestMetrics(otelPort string) error {
 	return nil
 }
 
-func sendTestTraces(otelPort string) error {
+func sendTestTraces(t *testing.T, otelPort string) error {
 	traces := ptrace.NewTraces()
 	rs := traces.ResourceSpans().AppendEmpty()
 	ss := rs.ScopeSpans().AppendEmpty()
@@ -308,7 +318,7 @@ func sendTestTraces(otelPort string) error {
 		return fmt.Errorf("failed to marshal traces: %w", err)
 	}
 
-	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("http://localhost:%s/v1/traces", otelPort), bytes.NewReader(tracesBytes))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodPost, fmt.Sprintf("http://localhost:%s/v1/traces", otelPort), bytes.NewReader(tracesBytes))
 	if err != nil {
 		return fmt.Errorf("failed to create traces request: %w", err)
 	}
@@ -323,7 +333,7 @@ func sendTestTraces(otelPort string) error {
 	return nil
 }
 
-func sendTestLogs(otelPort string) error {
+func sendTestLogs(t *testing.T, otelPort string) error {
 	logs := plog.NewLogs()
 	rl := logs.ResourceLogs().AppendEmpty()
 	sl := rl.ScopeLogs().AppendEmpty()
@@ -341,7 +351,7 @@ func sendTestLogs(otelPort string) error {
 		return fmt.Errorf("failed to marshal logs: %w", err)
 	}
 
-	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("http://localhost:%s/v1/logs", otelPort), bytes.NewReader(logsBytes))
+	req, err := http.NewRequestWithContext(t.Context(), http.MethodPost, fmt.Sprintf("http://localhost:%s/v1/logs", otelPort), bytes.NewReader(logsBytes))
 	if err != nil {
 		return fmt.Errorf("failed to create logs request: %w", err)
 	}
@@ -358,7 +368,8 @@ func sendTestLogs(otelPort string) error {
 
 func getFreePort(t *testing.T) string {
 	t.Helper()
-	l, err := net.Listen("tcp", "127.0.0.1:0")
+	lc := &net.ListenConfig{}
+	l, err := lc.Listen(t.Context(), "tcp", "127.0.0.1:0")
 	if err != nil {
 		t.Fatalf("could not get free port: %v", err)
 	}
